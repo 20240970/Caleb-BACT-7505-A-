@@ -1,0 +1,127 @@
+Router>enable
+Router#show run
+Building configuration...
+
+Current configuration : 1778 bytes
+!
+version 15.4
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+no service password-encryption
+!
+hostname Router
+!
+!
+!
+!
+!
+ip dhcp pool staff
+ network 192.168.10.0 255.255.255.192
+ default-router 192.168.10.1
+ip dhcp pool Guests
+ network 192.168.30.0 255.255.255.224
+ default-router 192.168.30.1
+ip dhcp pool Management
+ network 192.168.99.0 255.255.255.240
+ default-router 192.168.99.1
+ip dhcp pool Inter-Site
+ network 192.168.100.0 255.255.255.192
+ default-router 192.168.100.1
+ip dhcp pool Students
+ network 192.168.20.0 255.255.255.224
+ default-router 192.168.20.1
+ip dhcp pool Staff
+ network 192.168.10.0 255.255.255.192
+ default-router 192.168.10.1
+!
+!
+!
+ip cef
+no ipv6 cef
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+spanning-tree mode pvst
+!
+!
+!
+!
+!
+!
+interface GigabitEthernet0/0/0
+ no ip address
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/0/0.10
+ encapsulation dot1Q 10
+ ip address 192.168.10.1 255.255.255.192
+!
+interface GigabitEthernet0/0/0.20
+ encapsulation dot1Q 20
+ ip address 192.168.20.1 255.255.255.224
+!
+interface GigabitEthernet0/0/0.30
+ encapsulation dot1Q 30
+ ip address 192.168.30.1 255.255.255.224
+!
+interface GigabitEthernet0/0/0.50
+ encapsulation dot1Q 50
+ ip address 10.0.0.1 255.255.255.240
+!
+interface GigabitEthernet0/0/0.99
+ encapsulation dot1Q 99
+ ip address 192.168.99.1 255.255.255.240
+!
+interface GigabitEthernet0/0/0.100
+ encapsulation dot1Q 100
+ ip address 192.168.100.1 255.255.255.192
+!
+interface GigabitEthernet0/0/1
+ no ip address
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/0/2
+ no ip address
+ duplex auto
+ speed auto
+ shutdown
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+router rip
+!
+ip classless
+!
+ip flow-export version 9
+!
+!
+!
+!
+!
+!
+!
+line con 0
+!
+line aux 0
+!
+line vty 0 4
+ login
+!
+!
+!
+end
